@@ -1,5 +1,6 @@
 import { Bot, webhookCallback } from "grammy";
 import { Env, TContext, tSession } from "./session";
+import { handleUpdate } from "./bot";
 
 export default {
   async fetch(
@@ -19,6 +20,7 @@ export default {
         return new Response("!");
       }
       bot.use(tSession(env.REKORD));
+      handleUpdate(bot, env);
       return webhookCallback(bot, "cloudflare-mod")(req);
     } catch (e: any) {
       return new Response(e.message);
