@@ -5,3 +5,7 @@ compatibility_date = "2024-02-05"
 
 [vars]
 TOKEN = "6776438622:AAHo05MEqXZ5QNG9Y68a7dFlzMrt-e0156g"
+
+kv_namespaces = [
+    { binding = "REKORD", id = "68994e0cfb244bfaaaf2baae06ca42ac" }
+]

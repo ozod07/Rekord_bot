@@ -1,5 +1,5 @@
 import { Bot, webhookCallback } from "grammy";
-import { Env, TContext } from "./session";
+import { Env, TContext, tSession } from "./session";
 
 export default {
   async fetch(
@@ -15,8 +15,10 @@ export default {
         if (!webhook_info.url) {
           await bot.api.setWebhook(url.origin + url.pathname);
         }
+        console.log(webhook_info);
         return new Response("!");
       }
+      bot.use(tSession(env.REKORD));
       return webhookCallback(bot, "cloudflare-mod")(req);
     } catch (e: any) {
       return new Response(e.message);
