@@ -1,0 +1,7 @@
+account_id = "349662a86c2f8d5e0a2ea2c1f244b3d9"
+name = "rekord-bot"
+main = "src/index.ts"
+compatibility_date = "2024-02-05"
+
+[vars]
+TOKEN = "6776438622:AAHo05MEqXZ5QNG9Y68a7dFlzMrt-e0156g"
