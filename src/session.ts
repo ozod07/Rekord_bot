@@ -3,6 +3,7 @@ import { KvAdapter } from "./kv";
 
 export interface Env {
   TOKEN: string;
+  OWNER_ID: number;
   REKORD: KVNamespace;
 }
 
@@ -16,7 +17,7 @@ export enum Steps {
   SCHOOL = "school",
 }
 
-interface SessionData {
+export interface SessionData {
   subscribed: boolean;
   first_name: string;
   last_name: string;

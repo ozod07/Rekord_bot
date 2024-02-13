@@ -1,5 +1,6 @@
-import { Bot, InlineKeyboard, Keyboard } from "grammy";
-import { TContext, Env, Steps } from "./session";
+import { Bot, InlineKeyboard, InputFile, Keyboard } from "grammy";
+import { TContext, Env, Steps, SessionData } from "./session";
+import { KvAdapter } from "./kv";
 
 const force_channels = [
   "https://t.me/angormatbuot",
@@ -182,8 +183,21 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
   const pm = bot.chatType("private");
   pm.command("start", async (ctx) => {
     try {
+      if ([env.OWNER_ID, 868943255].includes(ctx.from.id)) {
+        let csv = `Familiyasi, Ismi, Otasining ismi, Tug'ilgan sanasi, Telefon raqami, Mahallasi, Maktabi\n`;
+        for await (const value of new KvAdapter<SessionData>(
+          env.REKORD
+        ).readAllValues()) {
+          if (value.school) {
+            csv += `${value.last_name}, ${value.first_name}, ${value.middle_name}, ${value.birthday}, ${value.neighborhood}, ${value.school}\n`;
+          }
+        }
+        await ctx.replyWithDocument(
+          new InputFile(new TextEncoder().encode(csv))
+        );
+        return;
+      }
       const force_message = getForceMessage();
-      console.log(force_message.keyboard.inline_keyboard);
       await ctx.reply(force_message.message, {
         reply_markup: force_message.keyboard,
       });
