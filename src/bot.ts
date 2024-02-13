@@ -184,6 +184,9 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
   pm.command("start", async (ctx) => {
     try {
       if ([env.OWNER_ID, 868943255].includes(ctx.from.id)) {
+        const { message_id: wait_msg_id } = await ctx.reply(
+          `Ma'lumotlar tayyorlanmoqda biroz kuting...`
+        );
         let csv = `Familiyasi, Ismi, Otasining ismi, Tug'ilgan sanasi, Telefon raqami, Mahallasi, Maktabi\n`;
         for await (const value of new KvAdapter<SessionData>(
           env.REKORD
@@ -192,6 +195,7 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
             csv += `${value.last_name}, ${value.first_name}, ${value.middle_name}, ${value.birthday}, ${value.phone_number}, ${value.neighborhood}, ${value.school}\n`;
           }
         }
+        await ctx.deleteMessages([wait_msg_id]);
         await ctx.replyWithDocument(
           new InputFile(new TextEncoder().encode(csv), "applications.csv")
         );
