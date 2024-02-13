@@ -8,8 +8,8 @@ export interface Env {
 }
 
 export enum Steps {
-  FIRST_NAME = "first_name",
   LAST_NAME = "last_name",
+  FIRST_NAME = "first_name",
   MIDDLE_NAME = "middle_name",
   PHONE_NUMBER = "phone_number",
   BIRTHDAY = "birthday",

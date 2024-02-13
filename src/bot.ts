@@ -192,7 +192,7 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
           env.REKORD
         ).readAllValues()) {
           if (value.school) {
-            csv += `${value.last_name}, ${value.first_name}, ${value.middle_name}, ${value.birthday}, ${value.phone_number}, ${value.neighborhood}, ${value.school}\n`;
+            csv += `${value.first_name}, ${value.middle_name}, ${value.last_name}, ${value.birthday}, ${value.phone_number}, ${value.neighborhood}, ${value.school}\n`;
           }
         }
         await ctx.deleteMessages([wait_msg_id]);
@@ -287,7 +287,7 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
       session.subscribed = isSubscribed;
 
       if (isSubscribed) {
-        await ctx.reply("Kanallarga obunangiz tasdiqlandi ✔");
+        await ctx.answerCallbackQuery("Kanallarga obunangiz tasdiqlandi ✔");
         await askLastName(ctx);
       } else {
         await ctx.reply(getForceMessage(true).message);
