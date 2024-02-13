@@ -193,7 +193,7 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
           }
         }
         await ctx.replyWithDocument(
-          new InputFile(new TextEncoder().encode(csv))
+          new InputFile(new TextEncoder().encode(csv), "applications.csv")
         );
         return;
       }
