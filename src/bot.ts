@@ -189,7 +189,7 @@ export const handleUpdate = (bot: Bot<TContext>, env: Env) => {
           env.REKORD
         ).readAllValues()) {
           if (value.school) {
-            csv += `${value.last_name}, ${value.first_name}, ${value.middle_name}, ${value.birthday}, ${value.neighborhood}, ${value.school}\n`;
+            csv += `${value.last_name}, ${value.first_name}, ${value.middle_name}, ${value.birthday}, ${value.phone_number}, ${value.neighborhood}, ${value.school}\n`;
           }
         }
         await ctx.replyWithDocument(
